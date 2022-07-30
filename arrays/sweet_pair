@@ -1,0 +1,39 @@
+// Given a string containing only ‘0’ and ‘1’, we need to find the maximum number of sweet pairs in the string.
+
+// A sweet pair is defined as a pair containing exactly one ‘1’ and one ‘0’. Each element in the string can only
+//  be paired with one element only. Also, the elements can be paired together only when the distance between them
+//   is not more than a given integer 'k'.
+let arr=[001101];
+let n=3;
+binaryPair(arr,n)
+
+function binaryPair(arr,n){
+    let zeroes=[];
+    let ones=[];
+    for(let i=0;i<arr.length;i++){
+        if(arr[i]===0){
+            zeroes.push(i);
+        }
+        else if(arr[i]==1){
+            ones.push(i);
+        }
+    }
+
+    let j=0;
+    let k=0;
+    let count=0;
+    while(j<zeroes.length && k<ones.length){
+        let diff = Math.abs(zeroes[j]-ones[k]);
+        if(diff <= n){
+            k++;
+            j++;
+            count++;
+        }else if(zeroes[j] < ones[k]){
+            j++;
+        }
+        else{
+            k++;
+        }
+    }
+    console.log(count);
+}
